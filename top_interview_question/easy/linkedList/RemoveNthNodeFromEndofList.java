@@ -41,12 +41,28 @@ public class RemoveNthNodeFromEndofList {
     }
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        ListNode rNode = new ListNode(head.val);
+        ListNode dummy = new ListNode(0);
+        //1. 先找出 list 長度
         int sz = listSize(head);
+        
+        // first 指標指到head
+        ListNode first = head;
+        // dummy.next 指到head
+        dummy.next = head;
+
+        //2. 找到要刪除的點的前一個位置, 並且把first指標移過去
         int index = sz - n - 1;
+        while (index > 0) {
+            first = first.next;
+            index --;
+        }
 
+        //3. 刪除點
+        System.out.println("ptr before delNode: "+first.val);
+        System.out.println("ptr delNode: "+first.next.val);
+        first.next = first.next.next;
 
-        return rNode;
+        return dummy.next;
     }
 
     public static void main(String[] args) {
@@ -67,10 +83,9 @@ public class RemoveNthNodeFromEndofList {
         RemoveNthNodeFromEndofList aa = new RemoveNthNodeFromEndofList();
         aa.printNode(node1);
         System.out.println("");
-        System.out.println(aa.listSize(node2));
-        int sz = aa.listSize(node1);
-
-        aa.removeNthFromEnd(node6,2);
+        System.out.println("size: "+ aa.listSize(node1));
+        aa.printNode(aa.removeNthFromEnd(node1,2));
+        ;
         
         // aa.deleteNode(node3);
         // aa.printNode(node1);
