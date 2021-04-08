@@ -98,6 +98,32 @@ public class RemoveNthNodeFromEndofList {
         return dummy.next;
     }
 
+    public ListNode removeNthFromEnd2(ListNode head, int n) {
+        // 1 2 3 4 5 6
+        int offset = n + 1;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode first = dummy;
+        ListNode second = dummy;
+
+        while(offset != 0){
+            first = first.next;
+            offset--;
+        }
+
+        // for (int i = 1; i <= n + 1; i++) {
+        //     first = first.next;
+        // }
+
+        while(first != null){
+            first = first.next;
+            second = second.next;
+        }
+
+        second.next = second.next.next;
+
+        return dummy.next;
+    }
 
     public static void main(String[] args) {
 
@@ -118,8 +144,8 @@ public class RemoveNthNodeFromEndofList {
         aa.printNode(node1);
         System.out.println("");
         System.out.println("size: "+ aa.listSize(node1));
-        aa.printNode(aa.removeNthFromEnd(node1,2));
-        ;
+        //aa.printNode(aa.removeNthFromEnd(node1,2));
+        aa.printNode(aa.removeNthFromEnd2(node1,2));
         
         // aa.deleteNode(node3);
         // aa.printNode(node1);
