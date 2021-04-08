@@ -40,18 +40,51 @@ public class RemoveNthNodeFromEndofList {
         return size;
     }
 
-    public ListNode removeNthFromEnd(ListNode head, int n) {
-        ListNode dummy = new ListNode(0);
-        //1. 先找出 list 長度
-        int sz = listSize(head);
+    // public ListNode removeNthFromEnd(ListNode head, int n) {
+    //     System.out.println("removeNthFromEnd: " + n + " th");
+    //     ListNode dummy = new ListNode(0);
+    //     //1. 先找出 list 長度
+    //     int sz = listSize(head);
         
-        // first 指標指到head
-        ListNode first = head;
-        // dummy.next 指到head
-        dummy.next = head;
+    //     // first 指標指到head
+    //     ListNode first = head;
+    //     // dummy.next 指到head
+    //     dummy.next = head;
 
-        //2. 找到要刪除的點的前一個位置, 並且把first指標移過去
-        int index = sz - n - 1;
+    //     //2. 找到要刪除的點的前一個位置(倒數第n個位置的前一個), 並且把first指標移過去
+    //     int index = sz - n - 1;
+    //     while (index > 0) {
+    //         first = first.next;
+    //         index --;
+    //     }
+
+    //     //3. 刪除點
+    //     System.out.println("ptr before delNode: "+first.val);
+    //     System.out.println("ptr delNode: "+first.next.val);
+    //     first.next = first.next.next;
+
+    //     return dummy.next;
+    // }
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        System.out.println("removeNthFromEnd: " + n + " th");
+        
+        int sz=1;
+
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        //first指到起點
+        ListNode first = head;
+        //first 用來算長度
+        while(first!=null){
+            sz++;
+            first = first.next;
+        }
+
+        //first指到起點
+        first = dummy;
+        //first 用來找要刪除的點的前一個位置(倒數第n個位置的前一個)
+        int index = sz - n - 1;       
         while (index > 0) {
             first = first.next;
             index --;
@@ -64,6 +97,7 @@ public class RemoveNthNodeFromEndofList {
 
         return dummy.next;
     }
+
 
     public static void main(String[] args) {
 
